@@ -40,29 +40,30 @@ public class Cancion implements Serializable{
     
     @NotNull(message = "colaboraciones es obligatorio")
     @Column(name = "colaboraciones", nullable = true)
-    private List<String> colaboraciones;
+    private String colaboraciones;
     
     @NotNull(message = "precio es obligatorio")
     @Min(value = 2000)
     @Column(name = "precio", nullable = false)
     private Double precio;
     
-    @JsonIgnore
+    /*@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_album", nullable = false)
-    private Album album;
+    private Album album;*/
 
     public Cancion() {
     }
 
-    public Cancion(String nombre, String descripcion, Time duracion, String formato, List<String> colaboraciones, Double precio, Album album) {
+    public Cancion(String nombre, String descripcion, Time duracion, String formato, String colaboraciones, Double precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.formato = formato;
         this.colaboraciones = colaboraciones;
         this.precio = precio;
-        this.album = album;
+        //this.album = album;
+        //, Album album
     }
 
     public Integer getId() {
@@ -105,11 +106,11 @@ public class Cancion implements Serializable{
         this.formato = formato;
     }
 
-    public List<String> getColaboraciones() {
+    public String getColaboraciones() {
         return colaboraciones;
     }
 
-    public void setColaboraciones(List<String> colaboraciones) {
+    public void setColaboraciones(String colaboraciones) {
         this.colaboraciones = colaboraciones;
     }
 
@@ -121,11 +122,11 @@ public class Cancion implements Serializable{
         this.precio = precio;
     }
 
-    public Album getAlbum() {
+    /*public Album getAlbum() {
         return album;
     }
 
     public void setAlbum(Album album) {
         this.album = album;
-    }
+    }*/
 }

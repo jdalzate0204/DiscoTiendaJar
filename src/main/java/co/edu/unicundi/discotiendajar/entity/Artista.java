@@ -29,8 +29,8 @@ public class Artista implements Serializable {
     
     @NotNull(message = "genero es obligatorio")
     @Size(min = 8, max = 9, message = "genero debe tener máximo 9 caracteres")
-    @Column(name = "genero", nullable = false, length = 9)
-    private String genero;
+    @Column(name = "sexo", nullable = false, length = 9)
+    private String sexo;
     
     @NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
@@ -42,19 +42,20 @@ public class Artista implements Serializable {
     @Column(name = "genero_musical", nullable = false, length = 30)
     private String generoMusical;
     
-    @OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Album> album;
+    /*@OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Album> album;*/
 
     public Artista() {
     }
 
-    public Artista(String nombre, DateFormat fechaNacimiento, String genero, String nacionalidad, String generoMusical, List<Album> album) {
+    public Artista(String nombre, DateFormat fechaNacimiento, String sexo, String nacionalidad, String generoMusical) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
-        this.genero = genero;
+        this.sexo = sexo;
         this.nacionalidad = nacionalidad;
         this.generoMusical = generoMusical;
-        this.album = album;
+        //this.album = album;
+        //, List<Album> album
     }
 
     public Integer getId() {
@@ -81,12 +82,12 @@ public class Artista implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getNacionalidad() {
@@ -105,11 +106,11 @@ public class Artista implements Serializable {
         this.generoMusical = generoMusical;
     }
 
-    public List<Album> getAlbum() {
+    /*public List<Album> getAlbum() {
         return album;
     }
 
     public void setAlbum(List<Album> album) {
         this.album = album;
-    }
+    }*/
 }
