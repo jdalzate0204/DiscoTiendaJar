@@ -1,8 +1,8 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.util.*;
+import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
  * @author acer
  */
 @Entity
-@Table (name = "artista")
+@Table (name = "artista", schema = "principal")
 public class Artista implements Serializable {
     
     @Id
@@ -25,7 +25,7 @@ public class Artista implements Serializable {
     
     @NotNull(message = "fechaNacimiento es obligatorio")
     @Column(name = "fecha_nacimiento", nullable = false)
-    private DateFormat fechaNacimiento;
+    private Timestamp fechaNacimiento; 
     
     @NotNull(message = "genero es obligatorio")
     @Size(min = 8, max = 9, message = "genero debe tener máximo 9 caracteres")
@@ -34,7 +34,7 @@ public class Artista implements Serializable {
     
     @NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
-    @Column(name = "nombre", nullable = false, length = 20)
+    @Column(name = "nacionalidad", nullable = false, length = 20)
     private String nacionalidad;
     
     @NotNull(message = "generoMusical es obligatorio")
@@ -42,20 +42,19 @@ public class Artista implements Serializable {
     @Column(name = "genero_musical", nullable = false, length = 30)
     private String generoMusical;
     
-    /*@OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Album> album;*/
+    @OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Album> album;
 
     public Artista() {
     }
 
-    public Artista(String nombre, DateFormat fechaNacimiento, String sexo, String nacionalidad, String generoMusical) {
+    public Artista(String nombre, Timestamp fechaNacimiento, String sexo, String nacionalidad, String generoMusical, List<Album> album) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;
         this.nacionalidad = nacionalidad;
         this.generoMusical = generoMusical;
-        //this.album = album;
-        //, List<Album> album
+        this.album = album;
     }
 
     public Integer getId() {
@@ -74,12 +73,12 @@ public class Artista implements Serializable {
         this.nombre = nombre;
     }
 
-    public DateFormat getFechaNacimiento() {
+    public Timestamp getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(DateFormat fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFechaNacimiento(Timestamp fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento; 
     }
 
     public String getSexo() {
@@ -106,11 +105,11 @@ public class Artista implements Serializable {
         this.generoMusical = generoMusical;
     }
 
-    /*public List<Album> getAlbum() {
+    public List<Album> getAlbum() {
         return album;
     }
 
     public void setAlbum(List<Album> album) {
         this.album = album;
-    }*/
+    }
 }

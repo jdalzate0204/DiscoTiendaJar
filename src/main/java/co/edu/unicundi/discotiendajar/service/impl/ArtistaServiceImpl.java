@@ -11,7 +11,7 @@ import javax.ejb.EJB;
  * @author acer
  */
 public class ArtistaServiceImpl implements IArtistaService{
-
+    
     /*@EJB
     public IArtistaRepo repo;*/
     
@@ -39,5 +39,6 @@ public class ArtistaServiceImpl implements IArtistaService{
     public void eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }

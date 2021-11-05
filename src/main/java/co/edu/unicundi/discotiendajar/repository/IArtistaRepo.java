@@ -8,6 +8,6 @@ import javax.ejb.Local;
  * @author acer
  */
 @Local
-public interface IArtistaRepo extends ICrud<Artista, Integer> {
+public interface IArtistaRepo  extends ICrud<Artista, Integer>{
     
 }

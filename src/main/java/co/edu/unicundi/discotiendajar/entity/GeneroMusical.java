@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @author acer
  */
 @Entity
-@Table (name = "genero_musical")
+@Table (name = "genero_musical", schema = "adicional")
 public class GeneroMusical implements Serializable {
     
     @Id

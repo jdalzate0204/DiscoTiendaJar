@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @author acer
  */
 @Entity
-@Table (name = "administrador")
+@Table (name = "administrador", schema = "principal")
 public class Administrador implements Serializable {
     
     @Id
@@ -18,15 +18,15 @@ public class Administrador implements Serializable {
     @Column(name = "usuario", nullable = false, length = 15)
     private String usuario;
     
-    @Column(name = "contraseña", nullable = false, length = 30)
-    private String contraseña;
+    @Column(name = "contrasena", nullable = false, length = 30)
+    private String contrasena;
 
     public Administrador() {
     }
 
-    public Administrador(String usuario, String contraseña) {
+    public Administrador(String usuario, String contrasena) {
         this.usuario = usuario;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
     }
 
     public Integer getId() {
@@ -45,11 +45,11 @@ public class Administrador implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

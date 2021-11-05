@@ -1,15 +1,14 @@
 package co.edu.unicundi.discotiendajar.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
 
 /**
  *
  * @author acer
  */
-@Entity
-@Table (name = "ventas")
-public class Ventas implements Serializable {
+/*@Entity
+@Table (name = "ventas", schema = "tienda")*/
+public class Ventas {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,6 @@ package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -12,8 +11,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author acer
  */
 @Entity
-@Table (name = "cancion")
-public class Cancion implements Serializable{
+@Table (name = "cancion", schema = "principal")
+public class Cancion implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,24 +45,22 @@ public class Cancion implements Serializable{
     @Min(value = 2000)
     @Column(name = "precio", nullable = false)
     private Double precio;
-    
-    /*@JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "id_album", nullable = false)
-    private Album album;*/
+    private Album album;
 
     public Cancion() {
     }
 
-    public Cancion(String nombre, String descripcion, Time duracion, String formato, String colaboraciones, Double precio) {
+    public Cancion(String nombre, String descripcion, Time duracion, String formato, String colaboraciones, Double precio, Album album) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.formato = formato;
         this.colaboraciones = colaboraciones;
         this.precio = precio;
-        //this.album = album;
-        //, Album album
+        this.album = album;
     }
 
     public Integer getId() {
@@ -121,12 +118,14 @@ public class Cancion implements Serializable{
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-
-    /*public Album getAlbum() {
+    
+    //@XmlTransient
+    @JsonIgnore
+    public Album getAlbum() {
         return album;
     }
 
     public void setAlbum(Album album) {
         this.album = album;
-    }*/
+    }
 }

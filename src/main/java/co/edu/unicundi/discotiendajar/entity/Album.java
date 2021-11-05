@@ -1,20 +1,19 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.util.*;
+import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author PAULA GUZMAN
+ * @author acer
  */
 @Entity
-@Table (name = "album")
-public class Album implements Serializable{
-    
+@Table (name = "album", schema = "principal")
+public class Album implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,33 +34,31 @@ public class Album implements Serializable{
     
     @NotNull(message = "fechaLanzamiento es obligatorio")
     @Column(name = "fecha_lanzamiento", nullable = false)
-    private Date fechaLanzamiento;
+    private Timestamp fechaLanzamiento;
     
     @NotNull(message = "precio es obligatorio")
     @Min(value = 10000)
     @Column(name = "precio", nullable = false)
     private Double precio;
 
-    /*@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_artista", nullable = false)
     private Artista artista;
     
-    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Cancion> cancion;*/
-    
+    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Cancion> cancion;
+
     public Album() {
     }
 
-    public Album(String nombre, String imagen, String descripcion, Date fechaLanzamiento, Double precio) {
+    public Album(String nombre, String imagen, String descripcion, Timestamp fechaLanzamiento, Double precio, Artista artista, List<Cancion> cancion) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.fechaLanzamiento = fechaLanzamiento;
         this.precio = precio;
-        /*this.artista = artista;
-        this.cancion = cancion;*/
-        //, Artista artista, List<Cancion> cancion
+        this.artista = artista;
+        this.cancion = cancion;
     }
 
     public Integer getId() {
@@ -96,11 +93,11 @@ public class Album implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public Date getFechaLanzamiento() {
+    public Timestamp getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
-    public void setFechaLanzamiento(Date fechaLanzamiento) {
+    public void setFechaLanzamiento(Timestamp fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
@@ -112,11 +109,13 @@ public class Album implements Serializable{
         this.precio = precio;
     }
 
-    /*public Artista getArtista() {
+    //@XmlTransient
+    @JsonIgnore
+    public Artista getArtista() {
         return artista;
     }
 
-    public void setArtista(Artista artista) {
+    public void setArtista(Artista artista) { 
         this.artista = artista;
     }
 
@@ -126,5 +125,5 @@ public class Album implements Serializable{
 
     public void setCancion(List<Cancion> cancion) {
         this.cancion = cancion;
-    }*/
+    }
 }

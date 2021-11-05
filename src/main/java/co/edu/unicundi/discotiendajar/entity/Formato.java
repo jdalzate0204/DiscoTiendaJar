@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @author acer
  */
 @Entity
-@Table (name = "formato")
+@Table (name = "formato", schema = "adicional")
 public class Formato implements Serializable {
     
     @Id

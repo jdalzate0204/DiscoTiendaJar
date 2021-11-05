@@ -13,7 +13,7 @@ public class CancionRepoImpl implements ICancionRepo {
 
     @PersistenceContext(unitName = "conexionDiscoTienda")
     private EntityManager em;
-    
+
     @Override
     public void guardar(Cancion obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
