@@ -3,59 +3,78 @@ package co.edu.unicundi.discotiendajar.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
  * @author acer
  */
-/*@Entity
-@Table (name = "ventas", schema = "tienda")*/
-public class Ventas implements Serializable {
+@Entity
+@Table (name = "venta", schema = "tienda")
+public class Venta implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    //@Column(name = "nombre_cliente", nullable = false, length = 20)
+    @NotNull(message = "nombreCliente es obligatorio")
+    @Size(min = 3, max = 30, message = "nombreCliente debe estar entre 3 y 30 caracteres")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
+    @Column(name = "nombre_cliente", nullable = false, length = 30)
     private String nombreCliente;
     
-    //@Column(name = "apellido_cliente", nullable = false, length = 20)
+    @NotNull(message = "apellidoCliente es obligatorio")
+    @Size(min = 4, max = 30, message = "apellidoCliente debe estar entre 4 y 30 caracteres")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
+    @Column(name = "apellido_cliente", nullable = false, length = 30)
     private String apellidoCliente;
     
-    //@Column(name = "celular", nullable = false, length = 20)
+    @NotNull(message = "celular es obligatorio")
+    @Size(min = 10, max = 10, message = "celular debe tener 10 caracteres")
+    @Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
+    @Column(name = "celular", nullable = false, length = 10)
     private String celular;
     
-    //@Column(name = "correo", nullable = false, length = 20)
+    @NotNull (message = "correo es obligatorio")
+    @Size(max = 50, message = "correo no debe superar los 50 caracteres")
+    @Pattern (regexp = "^[^@]+@[^@]+\\.[a-zA-Z]{2,}$", message = "¡Ingrese un formato valido!")
+    @Column(name = "correo", nullable = false, length = 50)
     private String correo;
     
-    //@Column(name = "direccion", nullable = false, length = 20)
+    @NotNull (message = "direccion es obligatorio")
+    @Size(max = 50, message = "direccion no debe superar los 50 caracteres")
+    @Column(name = "direccion", nullable = false, length = 50)
     private String direccion;
     
-    //@Column(name = "metodo_pago", nullable = false, length = 20)
-    private String metodoPago;
-    
-    //@Column(name = "fecha_compra", nullable = false, length = 20)
+    @Column(name = "fecha_compra", nullable = false, length = 20)
     private Timestamp fechaCompra;
     
-    //@Column(name = "cantidad_articulos", nullable = false, length = 20)
+    @Column(name = "cantidad_articulos", nullable = false, length = 20)
     private Integer cantidadArticulos;
     
-    //@Column(name = "total", nullable = false, length = 20)
+    @Column(name = "total", nullable = false, length = 20)
     private Double total;
+    
+    @OneToOne
+    @JoinColumn(name = "id_pago", nullable = false)
+    private Pago pago;
 
-    public Ventas() {
+    public Venta() {
     }
 
-    public Ventas(String nombreCliente, String apellidoCliente, String celular, String correo, String direccion, String metodoPago, Timestamp fechaCompra, Integer cantidadArticulos, Double total) {
+    public Venta(String nombreCliente, String apellidoCliente, String celular, String correo, String direccion, Timestamp fechaCompra, Integer cantidadArticulos, Double total, Pago pago) {
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
         this.celular = celular;
         this.correo = correo;
         this.direccion = direccion;
-        this.metodoPago = metodoPago;
         this.fechaCompra = fechaCompra;
         this.cantidadArticulos = cantidadArticulos;
         this.total = total;
+        this.pago = pago;
     }
 
     public Integer getId() {
@@ -106,14 +125,6 @@ public class Ventas implements Serializable {
         this.direccion = direccion;
     }
 
-    public String getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(String metodoPago) {
-        this.metodoPago = metodoPago;
-    }
-
     public Timestamp getFechaCompra() {
         return fechaCompra;
     }
@@ -136,5 +147,15 @@ public class Ventas implements Serializable {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    //@XmlTransient
+    @JsonIgnore
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
     }
 }

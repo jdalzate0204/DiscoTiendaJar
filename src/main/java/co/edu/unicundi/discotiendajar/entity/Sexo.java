@@ -17,12 +17,16 @@ public class Sexo implements Serializable {
     
     @Column(name = "descripcion", nullable = false, length = 9)
     private String descripcion;
+    
+    @OneToOne(mappedBy = "sexo")
+    private Artista artista;
 
     public Sexo() {
     }
 
-    public Sexo(String descripcion) {
+    public Sexo(String descripcion, Artista artista) {
         this.descripcion = descripcion;
+        this.artista = artista;
     }
 
     public Integer getId() {
@@ -39,5 +43,13 @@ public class Sexo implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Artista getArtista() {
+        return artista;
+    }
+
+    public void setArtista(Artista artista) {
+        this.artista = artista;
     }
 }

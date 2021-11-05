@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Artista implements Serializable {
     
     @NotNull(message = "nombre es obligatorio")
     @Size(min = 3, max = 50, message = "nombre debe estar entre 3 y 50 caracteres")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
     
@@ -27,20 +29,19 @@ public class Artista implements Serializable {
     @Column(name = "fecha_nacimiento", nullable = false)
     private Timestamp fechaNacimiento; 
     
-    @NotNull(message = "genero es obligatorio")
-    @Size(min = 8, max = 9, message = "genero debe tener máximo 9 caracteres")
-    @Column(name = "sexo", nullable = false, length = 9)
-    private String sexo;
-    
     @NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     @Column(name = "nacionalidad", nullable = false, length = 20)
     private String nacionalidad;
     
-    @NotNull(message = "generoMusical es obligatorio")
-    @Size(min = 3, max = 30, message = "generoMusical debe máximo 30 caracteres")
-    @Column(name = "genero_musical", nullable = false, length = 30)
-    private String generoMusical;
+    @OneToOne
+    @JoinColumn(name = "id_sexo", nullable = false)
+    private Sexo sexo;
+    
+    @OneToOne
+    @JoinColumn(name = "id_genero_musical", nullable = false)
+    private GeneroMusical generoMusical;
     
     @OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Album> album;
@@ -48,11 +49,11 @@ public class Artista implements Serializable {
     public Artista() {
     }
 
-    public Artista(String nombre, Timestamp fechaNacimiento, String sexo, String nacionalidad, String generoMusical, List<Album> album) {
+    public Artista(String nombre, Timestamp fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
-        this.sexo = sexo;
         this.nacionalidad = nacionalidad;
+        this.sexo = sexo;
         this.generoMusical = generoMusical;
         this.album = album;
     }
@@ -78,15 +79,7 @@ public class Artista implements Serializable {
     }
 
     public void setFechaNacimiento(Timestamp fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento; 
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getNacionalidad() {
@@ -97,11 +90,23 @@ public class Artista implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
-    public String getGeneroMusical() {
+    //@XmlTransient
+    @JsonIgnore
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    //@XmlTransient
+    @JsonIgnore
+    public GeneroMusical getGeneroMusical() {
         return generoMusical;
     }
 
-    public void setGeneroMusical(String generoMusical) {
+    public void setGeneroMusical(GeneroMusical generoMusical) {
         this.generoMusical = generoMusical;
     }
 

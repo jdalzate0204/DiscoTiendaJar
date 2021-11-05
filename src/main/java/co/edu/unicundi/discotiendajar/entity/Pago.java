@@ -18,11 +18,15 @@ public class Pago implements Serializable {
     @Column(name = "descripcion", nullable = false, length = 20)
     private String descripcion;
 
+    @OneToOne(mappedBy = "pago")
+    private Venta venta;
+
     public Pago() {
     }
 
-    public Pago(String descripcion) {
+    public Pago(String descripcion, Venta venta) {
         this.descripcion = descripcion;
+        this.venta = venta;
     }
 
     public Integer getId() {
@@ -39,5 +43,13 @@ public class Pago implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 }

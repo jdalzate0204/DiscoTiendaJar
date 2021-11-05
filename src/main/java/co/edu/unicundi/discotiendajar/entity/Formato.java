@@ -17,12 +17,16 @@ public class Formato implements Serializable {
     
     @Column(name = "descripcion", nullable = false, length = 3)
     private String descripcion;
+    
+    @OneToOne(mappedBy = "formato")
+    private Cancion cancion;
 
     public Formato() {
     }
 
-    public Formato(String descripcion) {
+    public Formato(String descripcion, Cancion cancion) {
         this.descripcion = descripcion;
+        this.cancion = cancion;
     }
 
     public Integer getId() {
@@ -39,5 +43,13 @@ public class Formato implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Cancion getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(Cancion cancion) {
+        this.cancion = cancion;
     }
 }

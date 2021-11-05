@@ -29,13 +29,9 @@ public class Cancion implements Serializable {
     private String descripcion;
     
     @NotNull(message = "duracion es obligatorio")
+    @Pattern(regexp = "^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$", message = "¡Ingrese el formato 00:00:00!")
     @Column(name = "duracion", nullable = false)
     private Time duracion;
-    
-    @NotNull(message = "formato es obligatorio")
-    @Size(min = 3, max = 3, message = "formato solo debe tener 3 caracteres")
-    @Column(name = "formato", nullable = false, length = 3)
-    private String formato;
     
     @NotNull(message = "colaboraciones es obligatorio")
     @Column(name = "colaboraciones", nullable = true)
@@ -43,24 +39,29 @@ public class Cancion implements Serializable {
     
     @NotNull(message = "precio es obligatorio")
     @Min(value = 2000)
+    @Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
     @Column(name = "precio", nullable = false)
     private Double precio;
 
     @ManyToOne
     @JoinColumn(name = "id_album", nullable = false)
     private Album album;
+    
+    @OneToOne
+    @JoinColumn(name = "id_formato", nullable = false)
+    private Formato formato;
 
     public Cancion() {
     }
 
-    public Cancion(String nombre, String descripcion, Time duracion, String formato, String colaboraciones, Double precio, Album album) {
+    public Cancion(String nombre, String descripcion, Time duracion, String colaboraciones, Double precio, Album album, Formato formato) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
-        this.formato = formato;
         this.colaboraciones = colaboraciones;
         this.precio = precio;
         this.album = album;
+        this.formato = formato;
     }
 
     public Integer getId() {
@@ -95,14 +96,6 @@ public class Cancion implements Serializable {
         this.duracion = duracion;
     }
 
-    public String getFormato() {
-        return formato;
-    }
-
-    public void setFormato(String formato) {
-        this.formato = formato;
-    }
-
     public String getColaboraciones() {
         return colaboraciones;
     }
@@ -118,7 +111,7 @@ public class Cancion implements Serializable {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
+
     //@XmlTransient
     @JsonIgnore
     public Album getAlbum() {
@@ -127,5 +120,15 @@ public class Cancion implements Serializable {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    //@XmlTransient
+    @JsonIgnore
+    public Formato getFormato() {
+        return formato;
+    }
+
+    public void setFormato(Formato formato) {
+        this.formato = formato;
     }
 }

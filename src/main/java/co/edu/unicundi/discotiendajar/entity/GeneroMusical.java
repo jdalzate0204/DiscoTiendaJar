@@ -17,12 +17,16 @@ public class GeneroMusical implements Serializable {
     
     @Column(name = "descripcion", nullable = false, length = 30)
     private String descripcion;
+    
+    @OneToOne(mappedBy = "generoMusical")
+    private Artista artista;
 
     public GeneroMusical() {
     }
 
-    public GeneroMusical(String descripcion) {
+    public GeneroMusical(String descripcion, Artista artista) {
         this.descripcion = descripcion;
+        this.artista = artista;
     }
 
     public Integer getId() {
@@ -39,5 +43,13 @@ public class GeneroMusical implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Artista getArtista() {
+        return artista;
+    }
+
+    public void setArtista(Artista artista) {
+        this.artista = artista;
     }
 }

@@ -14,6 +14,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table (name = "album", schema = "principal")
 public class Album implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -38,6 +39,7 @@ public class Album implements Serializable {
     
     @NotNull(message = "precio es obligatorio")
     @Min(value = 10000)
+    @Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
     @Column(name = "precio", nullable = false)
     private Double precio;
 
