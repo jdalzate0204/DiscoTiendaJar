@@ -9,6 +9,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table (name = "formato", schema = "adicional")
+
+@NamedQueries({
+    @NamedQuery(name = "Formato.Listar", query = "SELECT f.id, f.descripcion FROM Formato f")
+})
 public class Formato implements Serializable {
     
     @Id

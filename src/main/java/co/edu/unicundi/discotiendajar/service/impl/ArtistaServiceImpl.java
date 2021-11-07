@@ -1,19 +1,30 @@
 package co.edu.unicundi.discotiendajar.service.impl;
 
-import co.edu.unicundi.discotiendajar.entity.Artista;
+import co.edu.unicundi.discotiendajar.entity.*;
 import co.edu.unicundi.discotiendajar.repository.IArtistaRepo;
 import co.edu.unicundi.discotiendajar.service.IArtistaService;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.ejb.*;
 
 /**
  *
  * @author acer
  */
+@Stateless
 public class ArtistaServiceImpl implements IArtistaService{
     
-    /*@EJB
-    public IArtistaRepo repo;*/
+    @EJB
+    public IArtistaRepo repo;
+    
+    @Override
+    public List<Sexo> obtenerSexo() {
+        return this.repo.obtenerSexo();
+    }
+
+    @Override
+    public List<GeneroMusical> obtenerGenero() {
+        return this.repo.obtenerGenero();
+    }
     
     @Override
     public void guardar(Artista obj) {
@@ -38,7 +49,5 @@ public class ArtistaServiceImpl implements IArtistaService{
     @Override
     public void eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
+    }    
 }

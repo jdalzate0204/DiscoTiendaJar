@@ -9,6 +9,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table (name = "genero_musical", schema = "adicional")
+
+@NamedQueries({
+    @NamedQuery(name = "GeneroMusical.Listar", query = "SELECT g.id, g.descripcion FROM GeneroMusical g")
+})
 public class GeneroMusical implements Serializable {
     
     @Id

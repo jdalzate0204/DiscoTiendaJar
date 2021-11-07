@@ -1,6 +1,6 @@
 package co.edu.unicundi.discotiendajar.service;
 
-import co.edu.unicundi.discotiendajar.entity.Cancion;
+import co.edu.unicundi.discotiendajar.entity.*;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,4 +15,5 @@ public interface ICancionService {
     public Cancion listarPorId(Integer id);
     public void editar(Cancion obj);
     public void eliminar(Integer id);
+    public List<Formato> obtenerFormato();
 }

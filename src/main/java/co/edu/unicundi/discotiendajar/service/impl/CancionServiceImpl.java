@@ -1,6 +1,6 @@
 package co.edu.unicundi.discotiendajar.service.impl;
 
-import co.edu.unicundi.discotiendajar.entity.Cancion;
+import co.edu.unicundi.discotiendajar.entity.*;
 import co.edu.unicundi.discotiendajar.repository.ICancionRepo;
 import co.edu.unicundi.discotiendajar.service.ICancionService;
 import java.util.List;
@@ -13,8 +13,13 @@ import javax.ejb.*;
 @Stateless
 public class CancionServiceImpl implements ICancionService {
 
-    /*@EJB
-    public ICancionRepo repo;*/
+    @EJB
+    public ICancionRepo repo;
+    
+    @Override
+    public List<Formato> obtenerFormato() {
+        return this.repo.obtenerFormato();
+    }
     
     @Override
     public void guardar(Cancion obj) {
@@ -40,6 +45,4 @@ public class CancionServiceImpl implements ICancionService {
     public void eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
 }

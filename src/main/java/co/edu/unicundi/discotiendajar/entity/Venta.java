@@ -3,9 +3,7 @@ package co.edu.unicundi.discotiendajar.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**

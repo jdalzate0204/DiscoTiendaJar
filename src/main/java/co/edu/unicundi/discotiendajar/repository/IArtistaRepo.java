@@ -1,13 +1,15 @@
 package co.edu.unicundi.discotiendajar.repository;
 
-import co.edu.unicundi.discotiendajar.entity.Artista;
+import co.edu.unicundi.discotiendajar.entity.*;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
  * @author acer
  */
-@Local
+//@Local
 public interface IArtistaRepo  extends ICrud<Artista, Integer>{
-    
+    public List<Sexo> obtenerSexo();
+    public List<GeneroMusical> obtenerGenero();
 }

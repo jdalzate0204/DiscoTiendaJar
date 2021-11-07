@@ -1,6 +1,7 @@
 package co.edu.unicundi.discotiendajar.repository;
 
-import co.edu.unicundi.discotiendajar.entity.Cancion;
+import co.edu.unicundi.discotiendajar.entity.*;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -9,5 +10,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface ICancionRepo  extends ICrud<Cancion, Integer>{
-    
+    public List<Formato> obtenerFormato();
 }
