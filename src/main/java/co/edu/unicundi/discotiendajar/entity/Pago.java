@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table (name = "pago", schema = "adicional")
 
 @NamedQueries({
-    @NamedQuery(name = "Pago.Listar", query = "SELECT p.id, p.descripcion FROM Pago p")
+    @NamedQuery(name = "Pago.Listar", query = "SELECT NEW co.edu.unicundi.discotiendajar.dto.Adicional(p.id, p.descripcion) FROM Pago p")
 })
 public class Pago implements Serializable {
     
