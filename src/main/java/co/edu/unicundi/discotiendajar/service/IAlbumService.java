@@ -1,6 +1,8 @@
 package co.edu.unicundi.discotiendajar.service;
 
+import co.edu.unicundi.discotiendajar.dto.AlbumDto;
 import co.edu.unicundi.discotiendajar.entity.Album;
+import co.edu.unicundi.discotiendajar.exception.ResourceIllegalArgumentException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -10,7 +12,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface IAlbumService {
-    public void guardar(Album obj);
+    public void guardar(AlbumDto obj) throws ResourceIllegalArgumentException;
     public List<Album> listar();
     public Album listarPorId(Integer id);
     public void editar(Album obj);

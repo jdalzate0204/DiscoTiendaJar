@@ -1,10 +1,10 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
@@ -19,27 +19,19 @@ public class Album implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotNull(message = "nombre es obligatorio")
-    @Size(min = 5, max = 20, message = "nombre debe estar entre 5 y 20 caracteres")
     @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
     
-    @NotNull(message = "imagen es obligatorio")
     @Column(name = "imagen", nullable = true)
     private String imagen;
     
-    @NotNull(message = "descripción es obligatorio")
-    @Size(min = 5, max = 150, message = "descripción debe estar entre 5 y 20 caracteres")
     @Column(name = "descripcion", nullable = false, length = 150)
     private String descripcion;
     
-    @NotNull(message = "fechaLanzamiento es obligatorio")
     @Column(name = "fecha_lanzamiento", nullable = false)
-    private Timestamp fechaLanzamiento;
+    @Temporal(TemporalType.DATE)
+    private Calendar fechaLanzamiento;
     
-    @NotNull(message = "precio es obligatorio")
-    @Min(value = 10000)
-    @Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
     @Column(name = "precio", nullable = false)
     private Double precio;
 
@@ -53,7 +45,7 @@ public class Album implements Serializable {
     public Album() {
     }
 
-    public Album(String nombre, String imagen, String descripcion, Timestamp fechaLanzamiento, Double precio, Artista artista, List<Cancion> cancion) {
+    public Album(String nombre, String imagen, String descripcion, Calendar fechaLanzamiento, Double precio, Artista artista, List<Cancion> cancion) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
@@ -95,11 +87,11 @@ public class Album implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Timestamp getFechaLanzamiento() {
+    public Calendar getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
-    public void setFechaLanzamiento(Timestamp fechaLanzamiento) {
+    public void setFechaLanzamiento(Calendar fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
@@ -111,8 +103,8 @@ public class Album implements Serializable {
         this.precio = precio;
     }
 
-    //@XmlTransient
     @JsonIgnore
+    @XmlTransient
     public Artista getArtista() {
         return artista;
     }

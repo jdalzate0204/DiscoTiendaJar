@@ -1,7 +1,7 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -19,19 +19,20 @@ public class Artista implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotNull(message = "nombre es obligatorio")
+    /*@NotNull(message = "nombre es obligatorio")
     @Size(min = 3, max = 50, message = "nombre debe estar entre 3 y 50 caracteres")
-    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")*/
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
     
-    @NotNull(message = "fechaNacimiento es obligatorio")
+    //@NotNull(message = "fechaNacimiento es obligatorio")
     @Column(name = "fecha_nacimiento", nullable = false)
-    private Timestamp fechaNacimiento; 
+    @Temporal(TemporalType.DATE)
+    private Calendar fechaNacimiento;
     
-    @NotNull(message = "nacionalidad es obligatorio")
+    /*@NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
-    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")*/
     @Column(name = "nacionalidad", nullable = false, length = 20)
     private String nacionalidad;
     
@@ -49,7 +50,7 @@ public class Artista implements Serializable {
     public Artista() {
     }
 
-    public Artista(String nombre, Timestamp fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
+    public Artista(String nombre, Calendar fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
@@ -74,11 +75,11 @@ public class Artista implements Serializable {
         this.nombre = nombre;
     }
 
-    public Timestamp getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Timestamp fechaNacimiento) {
+    public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
