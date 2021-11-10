@@ -24,22 +24,22 @@ public class Artista implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    /*@NotNull(message = "nombre es obligatorio")
+    @NotNull(message = "nombre es obligatorio")
     @Size(min = 3, max = 50, message = "nombre debe estar entre 3 y 50 caracteres")
-    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")*/
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
     
 
-    //@NotNull(message = "fechaNacimiento es obligatorio")
+    @NotNull(message = "fechaNacimiento es obligatorio")
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fechaNacimiento;
 
     
-    /*@NotNull(message = "nacionalidad es obligatorio")
+    @NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
-    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")*/
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     @Column(name = "nacionalidad", nullable = false, length = 20)
     private String nacionalidad;
     

@@ -2,10 +2,13 @@ package co.edu.unicundi.discotiendajar.service.impl;
 
 import co.edu.unicundi.discotiendajar.dto.ArtistaDto;
 import co.edu.unicundi.discotiendajar.entity.*;
+import co.edu.unicundi.discotiendajar.exception.ResourceIllegalArgumentException;
 import co.edu.unicundi.discotiendajar.repository.IArtistaRepo;
 import co.edu.unicundi.discotiendajar.service.IArtistaService;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.*;
+import javax.validation.ConstraintViolation;
 
 /**
  *
@@ -28,20 +31,32 @@ public class ArtistaServiceImpl implements IArtistaService{
     }
     
     @Override
-    public void guardar(ArtistaDto obj) {
-       
-        Sexo sexo=new Sexo();
-        sexo.setId(obj.getIdSexo());
-        GeneroMusical genero=new GeneroMusical();
-        genero.setId(obj.getIdGeneroMusical());
-        Artista artista=new Artista();
-        artista.setFechaNacimiento(obj.getFechaNacimiento());
-        artista.setGeneroMusical(genero);
-        artista.setNacionalidad(obj.getNacionalidad());
-        artista.setNombre(obj.getNombre());
-        artista.setSexo(sexo);
+    public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException  {
+       try {
+        HashMap<String, String> errores = new HashMap();
+        
+        for (ConstraintViolation error: obj.validar())
+            errores.put(error.getPropertyPath().toString(), error.getMessage());
 
-      this.repo.guardar(artista);
+        if (errores.size() > 0)
+            throw new ResourceIllegalArgumentException(errores.toString());
+        else {
+            Sexo sexo=new Sexo();
+            sexo.setId(obj.getIdSexo());
+            GeneroMusical genero=new GeneroMusical();
+            genero.setId(obj.getIdGeneroMusical());
+            Artista artista=new Artista();
+            artista.setFechaNacimiento(obj.getFechaNacimiento());
+            artista.setGeneroMusical(genero);
+            artista.setNacionalidad(obj.getNacionalidad());
+            artista.setNombre(obj.getNombre());
+            artista.setSexo(sexo);
+
+            this.repo.guardar(artista);
+        }
+        } catch (IllegalArgumentException e){
+            throw e;
+        }
     }
 
     @Override

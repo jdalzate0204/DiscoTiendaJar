@@ -2,6 +2,7 @@ package co.edu.unicundi.discotiendajar.service;
 
 import co.edu.unicundi.discotiendajar.dto.ArtistaDto;
 import co.edu.unicundi.discotiendajar.entity.*;
+import co.edu.unicundi.discotiendajar.exception.ResourceIllegalArgumentException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -11,7 +12,7 @@ import javax.ejb.Local;
  */
 //@Local
 public interface IArtistaService {
-    public void guardar(ArtistaDto obj);
+    public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException ;
     public List<Artista> listar();
     public Artista listarPorId(Integer id);
     public void editar(Artista obj);

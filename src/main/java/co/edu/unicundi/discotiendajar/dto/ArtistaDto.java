@@ -1,6 +1,14 @@
 package co.edu.unicundi.discotiendajar.dto;
 
 import java.util.Calendar;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -9,10 +17,24 @@ import java.util.Calendar;
 public class ArtistaDto {
 
     private Integer id;
+    
+    @NotNull(message = "nombre es obligatorio")
+    @Size(min = 3, max = 50, message = "nombre debe estar entre 3 y 50 caracteres")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     private String nombre;
+    
+    @NotNull(message = "fechaNacimiento es obligatorio")
     private Calendar fechaNacimiento; 
+    
+    @NotNull(message = "nacionalidad es obligatorio")
+    @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
+    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     private String nacionalidad;
+    
+    @NotNull(message = "idSexo es obligatorio")
     private Integer idSexo;
+    
+    @NotNull(message = "idGeneroMusical es obligatorio")
     private Integer idGeneroMusical;
 
     public ArtistaDto() {
@@ -111,5 +133,10 @@ public class ArtistaDto {
         this.idGeneroMusical = idGeneroMusical;
     }
 
+      public Set<ConstraintViolation<ArtistaDto>> validar(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        return validator.validate(this);
+    }
     
 }
