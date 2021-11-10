@@ -1,5 +1,6 @@
 package co.edu.unicundi.discotiendajar.service.impl;
 
+import co.edu.unicundi.discotiendajar.dto.ArtistaDto;
 import co.edu.unicundi.discotiendajar.entity.*;
 import co.edu.unicundi.discotiendajar.repository.IArtistaRepo;
 import co.edu.unicundi.discotiendajar.service.IArtistaService;
@@ -27,8 +28,20 @@ public class ArtistaServiceImpl implements IArtistaService{
     }
     
     @Override
-    public void guardar(Artista obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void guardar(ArtistaDto obj) {
+       
+        Sexo sexo=new Sexo();
+        sexo.setId(obj.getIdSexo());
+        GeneroMusical genero=new GeneroMusical();
+        genero.setId(obj.getIdGeneroMusical());
+        Artista artista=new Artista();
+        artista.setFechaNacimiento(obj.getFechaNacimiento());
+        artista.setGeneroMusical(genero);
+        artista.setNacionalidad(obj.getNacionalidad());
+        artista.setNombre(obj.getNombre());
+        artista.setSexo(sexo);
+
+      this.repo.guardar(artista);
     }
 
     @Override

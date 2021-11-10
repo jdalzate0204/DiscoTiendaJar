@@ -1,5 +1,6 @@
 package co.edu.unicundi.discotiendajar.service;
 
+import co.edu.unicundi.discotiendajar.dto.ArtistaDto;
 import co.edu.unicundi.discotiendajar.entity.*;
 import java.util.List;
 import javax.ejb.Local;
@@ -10,7 +11,7 @@ import javax.ejb.Local;
  */
 //@Local
 public interface IArtistaService {
-    public void guardar(Artista obj);
+    public void guardar(ArtistaDto obj);
     public List<Artista> listar();
     public Artista listarPorId(Integer id);
     public void editar(Artista obj);

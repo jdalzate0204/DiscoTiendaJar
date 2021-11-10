@@ -30,7 +30,7 @@ public class ArtistaRepoImpl implements IArtistaRepo {
     
     @Override
     public void guardar(Artista obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      this.em.persist(obj);
     }
 
     @Override

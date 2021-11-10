@@ -1,9 +1,14 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -26,8 +31,10 @@ public class Artista implements Serializable {
     private String nombre;
     
     @NotNull(message = "fechaNacimiento es obligatorio")
+    @Pattern(regexp = "^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$", message = "¡Solo se admiten letras!")
     @Column(name = "fecha_nacimiento", nullable = false)
-    private Timestamp fechaNacimiento; 
+    @Temporal(TemporalType.DATE)
+    private Calendar fechaNacimiento; 
     
     @NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
@@ -49,7 +56,7 @@ public class Artista implements Serializable {
     public Artista() {
     }
 
-    public Artista(String nombre, Timestamp fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
+    public Artista(String nombre, Calendar fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
@@ -74,11 +81,11 @@ public class Artista implements Serializable {
         this.nombre = nombre;
     }
 
-    public Timestamp getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Timestamp fechaNacimiento) {
+    public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -116,5 +123,14 @@ public class Artista implements Serializable {
 
     public void setAlbum(List<Album> album) {
         this.album = album;
+    }
+    /**
+     * Metodo que envia la intancia para validar si tiene alguna violación 
+     * @return 
+     */
+    public Set<ConstraintViolation<Artista>> validar(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        return validator.validate(this);
     }
 }
