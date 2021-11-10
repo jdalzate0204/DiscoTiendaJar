@@ -18,7 +18,7 @@ public class AlbumRepoImpl implements IAlbumRepo {
 
     @Override
     public void guardar(Album obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.em.persist(obj);
     }
 
     @Override
