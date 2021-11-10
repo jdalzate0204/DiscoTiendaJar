@@ -30,18 +30,12 @@ public class Artista implements Serializable {
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
     
-<<<<<<< HEAD
-    @NotNull(message = "fechaNacimiento es obligatorio")
-    @Pattern(regexp = "^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$", message = "¡Solo se admiten letras!")
-    @Column(name = "fecha_nacimiento", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar fechaNacimiento; 
-=======
+
     //@NotNull(message = "fechaNacimiento es obligatorio")
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fechaNacimiento;
->>>>>>> bb2399990026c17ec456a91805578cdbd9cccab3
+
     
     /*@NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")

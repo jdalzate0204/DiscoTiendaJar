@@ -1,10 +1,5 @@
 package co.edu.unicundi.discotiendajar.entity;
-
 import java.io.Serializable;
-<<<<<<< HEAD
-import java.sql.Timestamp;
-=======
->>>>>>> bb2399990026c17ec456a91805578cdbd9cccab3
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
@@ -22,24 +17,9 @@ public class Album implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-<<<<<<< HEAD
-    /*@NotNull(message = "nombre es obligatorio")
-    @Size(min = 5, max = 20, message = "nombre debe estar entre 5 y 20 caracteres")*/
-    @Column(name = "nombre", nullable = false, length = 20)
-    private String nombre;
-    
-    /*@NotNull(message = "imagen es obligatorio")*/
-    @Column(name = "imagen", nullable = true)
-    private String imagen;
-    
-    /*@NotNull(message = "descripción es obligatorio")
-    @Size(min = 5, max = 150, message = "descripción debe estar entre 5 y 20 caracteres")*/
-    @Column(name = "descripcion", nullable = false, length = 150)
-    private String descripcion;
-    
+
     //@NotNull(message = "fechaLanzamiento es obligatorio")
-=======
+
     @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
     
@@ -49,17 +29,12 @@ public class Album implements Serializable {
     @Column(name = "descripcion", nullable = false, length = 150)
     private String descripcion;
     
->>>>>>> bb2399990026c17ec456a91805578cdbd9cccab3
+
     @Column(name = "fecha_lanzamiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fechaLanzamiento;
     
-<<<<<<< HEAD
-    /*@NotNull(message = "precio es obligatorio")
-    @Min(value = 10000)
-    @Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")*/
-=======
->>>>>>> bb2399990026c17ec456a91805578cdbd9cccab3
+
     @Column(name = "precio", nullable = false)
     private Double precio;
 
