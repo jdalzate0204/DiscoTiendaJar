@@ -31,7 +31,7 @@ public class ArtistaServiceImpl implements IArtistaService{
     }
     
     @Override
-    public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException  {
+    public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException,CloneNotSupportedException  {
         HashMap<String, String> errores = new HashMap();
         
         for (ConstraintViolation error: obj.validar())
@@ -40,18 +40,24 @@ public class ArtistaServiceImpl implements IArtistaService{
         if (errores.size() > 0)
             throw new ResourceIllegalArgumentException(errores.toString());
         else {
-            Sexo sexo=new Sexo();
-            sexo.setId(obj.getIdSexo());
-            GeneroMusical genero=new GeneroMusical();
-            genero.setId(obj.getIdGeneroMusical());
-            Artista artista=new Artista();
-            artista.setFechaNacimiento(obj.getFechaNacimiento());
-            artista.setGeneroMusical(genero);
-            artista.setNacionalidad(obj.getNacionalidad());
-            artista.setNombre(obj.getNombre());
-            artista.setSexo(sexo);
+            int contador = this.repo.validarExistenciaArtista(obj.getNombre());
+            
+             if (contador == 0) {
+            
+                Sexo sexo=new Sexo();
+                sexo.setId(obj.getIdSexo());
+                GeneroMusical genero=new GeneroMusical();
+                genero.setId(obj.getIdGeneroMusical());
+                Artista artista=new Artista();
+                artista.setFechaNacimiento(obj.getFechaNacimiento());
+                artista.setGeneroMusical(genero);
+                artista.setNacionalidad(obj.getNacionalidad());
+                artista.setNombre(obj.getNombre());
+                artista.setSexo(sexo);
 
-            this.repo.guardar(artista);
+                this.repo.guardar(artista);
+            }else
+                throw new CloneNotSupportedException("el Artista ya esta registrado"); 
         }
     }
 

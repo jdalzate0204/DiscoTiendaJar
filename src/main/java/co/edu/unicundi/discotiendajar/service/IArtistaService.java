@@ -12,7 +12,7 @@ import javax.ejb.Local;
  */
 //@Local
 public interface IArtistaService {
-    public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException ;
+    public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException,CloneNotSupportedException ;
     public List<Artista> listar();
     public Artista listarPorId(Integer id);
     public void editar(Artista obj);

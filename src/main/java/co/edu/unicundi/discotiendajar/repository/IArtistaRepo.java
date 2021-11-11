@@ -12,4 +12,5 @@ import javax.ejb.Local;
 public interface IArtistaRepo  extends ICrud<Artista, Integer>{
     public List<Sexo> obtenerSexo();
     public List<GeneroMusical> obtenerGenero();
+    public int validarExistenciaArtista(String nombre);
 }

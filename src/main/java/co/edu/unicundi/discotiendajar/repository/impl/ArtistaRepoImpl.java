@@ -52,4 +52,13 @@ public class ArtistaRepoImpl implements IArtistaRepo {
     public void eliminar(Artista obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
+
+    @Override
+    public int validarExistenciaArtista(String nombre) {
+       Query query = em.createNamedQuery("Artista.ContarNombre");
+        query.setParameter("nombre", nombre);
+        Number validador = (Number) query.getSingleResult();
+        int respuesta = validador.intValue();
+        return respuesta;
+    }
 }
