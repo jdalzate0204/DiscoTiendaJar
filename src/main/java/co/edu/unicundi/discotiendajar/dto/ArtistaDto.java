@@ -40,6 +40,12 @@ public class ArtistaDto {
     public ArtistaDto() {
     }
 
+    //Constructor Select
+    public ArtistaDto(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public ArtistaDto(Integer id, String nombre, Calendar fechaNacimiento, String nacionalidad, Integer idSexo, Integer idGeneroMusical) {
         this.id = id;
         this.nombre = nombre;

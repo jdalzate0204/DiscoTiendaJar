@@ -22,8 +22,6 @@ public class Album implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //@NotNull(message = "fechaLanzamiento es obligatorio")
-
     @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
     
@@ -32,12 +30,10 @@ public class Album implements Serializable {
     
     @Column(name = "descripcion", nullable = false, length = 150)
     private String descripcion;
-    
 
     @Column(name = "fecha_lanzamiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fechaLanzamiento;
-    
 
     @Column(name = "precio", nullable = false)
     private Double precio;
@@ -110,8 +106,8 @@ public class Album implements Serializable {
         this.precio = precio;
     }
 
-    @JsonIgnore
     @XmlTransient
+    @JsonIgnore
     public Artista getArtista() {
         return artista;
     }

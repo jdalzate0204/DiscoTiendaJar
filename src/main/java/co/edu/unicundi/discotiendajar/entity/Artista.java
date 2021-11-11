@@ -3,13 +3,7 @@ package co.edu.unicundi.discotiendajar.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.*;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
@@ -20,30 +14,22 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Table (name = "artista", schema = "principal")
 
 @NamedQueries({
-    @NamedQuery(name = "Artista.ContarNombre", query = "SELECT COUNT(a.nombre) FROM Artista a WHERE a.nombre = :nombre")
+    @NamedQuery(name = "Artista.ContarNombre", query = "SELECT COUNT(a.nombre) FROM Artista a WHERE a.nombre = :nombre"),
+    @NamedQuery(name = "Artista.ListarTodos", query = "SELECT NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id, a.nombre) FROM Artista a")
 })
 public class Artista implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @NotNull(message = "nombre es obligatorio")
-    @Size(min = 3, max = 50, message = "nombre debe estar entre 3 y 50 caracteres")
-    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
+
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
     
-
-    @NotNull(message = "fechaNacimiento es obligatorio")
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fechaNacimiento;
 
-    
-    @NotNull(message = "nacionalidad es obligatorio")
-    @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
-    @Pattern(regexp = "^[a-zA-Z_]+( [a-zA-Z_]+)*$", message = "¡Solo se admiten letras!")
     @Column(name = "nacionalidad", nullable = false, length = 20)
     private String nacionalidad;
     
@@ -57,6 +43,12 @@ public class Artista implements Serializable {
     
     @OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Album> album;
+    
+    @Transient //NoMapped
+    private Integer idSexo;
+    
+    @Transient
+    private Integer idGeneroMusical;
 
     public Artista() {
     }
@@ -129,13 +121,20 @@ public class Artista implements Serializable {
     public void setAlbum(List<Album> album) {
         this.album = album;
     }
-    /**
-     * Metodo que envia la intancia para validar si tiene alguna violación 
-     * @return 
-     */
-    public Set<ConstraintViolation<Artista>> validar(){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        return validator.validate(this);
+
+    public Integer getIdSexo() {
+        return idSexo;
+    }
+
+    public void setIdSexo(Integer idSexo) {
+        this.idSexo = idSexo;
+    }
+
+    public Integer getIdGeneroMusical() {
+        return idGeneroMusical;
+    }
+
+    public void setIdGeneroMusical(Integer idGeneroMusical) {
+        this.idGeneroMusical = idGeneroMusical;
     }
 }
