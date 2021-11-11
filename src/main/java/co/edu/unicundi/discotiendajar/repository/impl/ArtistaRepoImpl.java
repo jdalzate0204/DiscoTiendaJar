@@ -32,11 +32,10 @@ public class ArtistaRepoImpl implements IArtistaRepo {
     public void guardar(Artista obj) {
       this.em.persist(obj);
     }
-
+    
     @Override
     public List<Artista> listarTodos() {
-        TypedQuery<Artista> query = em.createNamedQuery("Artista.ListarTodos", Artista.class);
-        return query.getResultList();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -61,5 +60,11 @@ public class ArtistaRepoImpl implements IArtistaRepo {
         Number validador = (Number) query.getSingleResult();
         int respuesta = validador.intValue();
         return respuesta;
+    }
+
+    @Override
+    public List<Artista> listarSelect() {
+        TypedQuery<Artista> query = em.createNamedQuery("Artista.ListarSelect", Artista.class);
+        return query.getResultList();
     }
 }

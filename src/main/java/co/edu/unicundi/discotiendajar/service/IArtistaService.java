@@ -19,4 +19,5 @@ public interface IArtistaService {
     public void eliminar(Integer id);
     public List<Sexo> obtenerSexo();
     public List<GeneroMusical> obtenerGenero();
+    public List<Artista> listarSelect();
 }

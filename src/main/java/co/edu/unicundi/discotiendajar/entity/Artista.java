@@ -15,7 +15,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 @NamedQueries({
     @NamedQuery(name = "Artista.ContarNombre", query = "SELECT COUNT(a.nombre) FROM Artista a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "Artista.ListarTodos", query = "SELECT NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id, a.nombre) FROM Artista a")
+    @NamedQuery(name = "Artista.ListarSelect", query = "SELECT NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id, a.nombre) FROM Artista a")
 })
 public class Artista implements Serializable {
     
