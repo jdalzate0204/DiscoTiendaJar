@@ -9,5 +9,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface IAlbumRepo extends ICrud<Album, Integer> {
-    
+    public int validarExistenciaAlbum(String nombre);
 }

@@ -22,6 +22,15 @@ public class AlbumRepoImpl implements IAlbumRepo {
     }
 
     @Override
+    public int validarExistenciaAlbum(String nombre) {
+        Query query = em.createNamedQuery("Album.ContarNombre");
+        query.setParameter("nombre", nombre);
+        Number validador = (Number) query.getSingleResult();
+        int respuesta = validador.intValue();
+        return respuesta;
+    }
+
+    @Override
     public List<Album> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -39,6 +48,5 @@ public class AlbumRepoImpl implements IAlbumRepo {
     @Override
     public void eliminar(Album obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

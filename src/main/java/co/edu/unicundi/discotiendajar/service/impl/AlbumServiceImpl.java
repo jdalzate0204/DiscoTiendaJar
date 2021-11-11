@@ -20,8 +20,7 @@ public class AlbumServiceImpl implements IAlbumService {
     public IAlbumRepo repo;
     
     @Override
-    public void guardar(AlbumDto obj) throws ResourceIllegalArgumentException {
-        try {
+    public void guardar(AlbumDto obj) throws ResourceIllegalArgumentException, CloneNotSupportedException {        
         HashMap<String, String> errores = new HashMap();
         
         for (ConstraintViolation error: obj.validar())
@@ -30,21 +29,23 @@ public class AlbumServiceImpl implements IAlbumService {
         if (errores.size() > 0)
             throw new ResourceIllegalArgumentException(errores.toString());
         else {
-            Artista artista = new Artista();
-            artista.setId(obj.getIdArtista());
+            int contador = this.repo.validarExistenciaAlbum(obj.getNombre());
+            
+            if (contador == 0) {
+                Artista artista = new Artista();
+                artista.setId(obj.getIdArtista());
 
-            Album album = new Album();
-            album.setNombre(obj.getNombre());
-            album.setImagen(obj.getImagen());
-            album.setDescripcion(obj.getDescripcion());
-            album.setFechaLanzamiento(obj.getFechaLanzamiento());
-            album.setPrecio(obj.getPrecio());
-            album.setArtista(artista);
+                Album album = new Album();
+                album.setNombre(obj.getNombre());
+                album.setImagen(obj.getImagen());
+                album.setDescripcion(obj.getDescripcion());
+                album.setFechaLanzamiento(obj.getFechaLanzamiento());
+                album.setPrecio(obj.getPrecio());
+                album.setArtista(artista);
 
-            this.repo.guardar(album);
-        }
-        } catch (IllegalArgumentException e){
-            throw e;
+                this.repo.guardar(album);
+            } else
+                throw new CloneNotSupportedException("Álbum ya registrado");  
         }
     }
 

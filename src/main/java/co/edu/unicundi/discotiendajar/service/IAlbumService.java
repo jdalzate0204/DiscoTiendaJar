@@ -12,7 +12,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface IAlbumService {
-    public void guardar(AlbumDto obj) throws ResourceIllegalArgumentException;
+    public void guardar(AlbumDto obj) throws ResourceIllegalArgumentException, CloneNotSupportedException;
     public List<Album> listar();
     public Album listarPorId(Integer id);
     public void editar(Album obj);

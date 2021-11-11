@@ -12,6 +12,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 @Entity
 @Table (name = "album", schema = "principal")
+
+@NamedQueries({
+    @NamedQuery(name = "Album.ContarNombre", query = "SELECT COUNT(a.nombre) FROM Album a WHERE a.nombre = :nombre")
+})
 public class Album implements Serializable {
     
     @Id

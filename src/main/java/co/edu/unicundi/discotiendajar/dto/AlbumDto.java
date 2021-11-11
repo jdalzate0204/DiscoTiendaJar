@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 public class AlbumDto {
     private Integer id;
     
-    @NotNull(message = "nombre es obligatorio")
+    @NotNull(message = "nombre es obligatorio") 
     @Size(min = 5, max = 20, message = "nombre debe estar entre 5 y 20 caracteres")
     private String nombre;
     
@@ -24,16 +24,13 @@ public class AlbumDto {
     private String descripcion;
     
     @NotNull(message = "fechaLanzamiento es obligatorio")
-    //@Pattern(regexp = "^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$", message = "¡Solo se admiten numeros!")
     private Calendar fechaLanzamiento;
     
     @NotNull(message = "precio es obligatorio")
     @Min(value = 10000)
-    //@Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
     private Double precio;
     
     @NotNull(message = "idArtista es obligatorio")
-    //@Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
     private Integer idArtista;
 
     public AlbumDto() {

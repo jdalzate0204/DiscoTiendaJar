@@ -32,7 +32,6 @@ public class ArtistaServiceImpl implements IArtistaService{
     
     @Override
     public void guardar(ArtistaDto obj)throws ResourceIllegalArgumentException  {
-       try {
         HashMap<String, String> errores = new HashMap();
         
         for (ConstraintViolation error: obj.validar())
@@ -53,9 +52,6 @@ public class ArtistaServiceImpl implements IArtistaService{
             artista.setSexo(sexo);
 
             this.repo.guardar(artista);
-        }
-        } catch (IllegalArgumentException e){
-            throw e;
         }
     }
 
