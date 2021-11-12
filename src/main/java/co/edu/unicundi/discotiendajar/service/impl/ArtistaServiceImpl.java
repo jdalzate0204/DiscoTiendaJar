@@ -63,7 +63,7 @@ public class ArtistaServiceImpl implements IArtistaService{
 
     @Override
     public List<Artista> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      return this.repo.listarTodos();
     }
 
     @Override
