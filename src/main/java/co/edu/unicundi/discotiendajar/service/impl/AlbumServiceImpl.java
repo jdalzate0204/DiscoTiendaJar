@@ -51,7 +51,7 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Override
     public List<Album> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.repo.listarTodos();
     }
 
     @Override

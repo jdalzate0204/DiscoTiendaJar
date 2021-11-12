@@ -32,7 +32,8 @@ public class AlbumRepoImpl implements IAlbumRepo {
 
     @Override
     public List<Album> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Album> query = em.createNamedQuery("Album.ListarTodos", Album.class);
+        return query.getResultList();
     }
 
     @Override

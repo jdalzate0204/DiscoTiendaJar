@@ -1,6 +1,7 @@
 package co.edu.unicundi.discotiendajar.dto;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 import javax.validation.*;
 import javax.validation.constraints.*;
@@ -13,7 +14,7 @@ public class AlbumDto {
     private Integer id;
     
     @NotNull(message = "nombre es obligatorio") 
-    @Size(min = 5, max = 20, message = "nombre debe estar entre 5 y 20 caracteres")
+    @Size(min = 5, max = 30, message = "nombre debe estar entre 5 y 20 caracteres")
     private String nombre;
     
     @NotNull(message = "imagen es obligatorio")
@@ -24,7 +25,7 @@ public class AlbumDto {
     private String descripcion;
     
     @NotNull(message = "fechaLanzamiento es obligatorio")
-    private Calendar fechaLanzamiento;
+    private String fechaLanzamiento;
     
     @NotNull(message = "precio es obligatorio")
     @Min(value = 10000)
@@ -32,11 +33,24 @@ public class AlbumDto {
     
     @NotNull(message = "idArtista es obligatorio")
     private Integer idArtista;
+    
+    private String artista;
 
     public AlbumDto() {
     }
 
-    public AlbumDto(Integer id, String nombre, String imagen, String descripcion, Calendar fechaLanzamiento, Double precio, Integer idArtista) {
+    //Constructor listar todos (JOIN)
+    public AlbumDto(Integer id, String nombre, String imagen, String descripcion, String fechaLanzamiento, Double precio, String artista) {
+        this.id = id;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.descripcion = descripcion;
+        this.fechaLanzamiento = fechaLanzamiento;
+        this.precio = precio;
+        this.artista = artista;
+    }
+
+    public AlbumDto(Integer id, String nombre, String imagen, String descripcion, String fechaLanzamiento, Double precio, Integer idArtista) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -78,11 +92,11 @@ public class AlbumDto {
         this.descripcion = descripcion;
     }
 
-    public Calendar getFechaLanzamiento() {
+    public String getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
-    public void setFechaLanzamiento(Calendar fechaLanzamiento) {
+    public void setFechaLanzamiento(String fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
@@ -100,6 +114,14 @@ public class AlbumDto {
 
     public void setIdArtista(Integer idArtista) {
         this.idArtista = idArtista;
+    }
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public void setArtista(String artista) {
+        this.artista = artista;
     }
     
     public Set<ConstraintViolation<AlbumDto>> validar(){
