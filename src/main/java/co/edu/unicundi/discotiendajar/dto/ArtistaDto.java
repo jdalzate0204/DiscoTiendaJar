@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
  */
 public class ArtistaDto {
 
+   
     private Integer id;
     
     @NotNull(message = "nombre es obligatorio")
@@ -24,7 +25,7 @@ public class ArtistaDto {
     private String nombre;
     
     @NotNull(message = "fechaNacimiento es obligatorio")
-    private Calendar fechaNacimiento; 
+    private String fechaNacimiento; 
     
     @NotNull(message = "nacionalidad es obligatorio")
     @Size(min = 4, max = 20, message = "nacionalidad debe tener máximo 20 caracteres")
@@ -36,9 +37,22 @@ public class ArtistaDto {
     
     @NotNull(message = "idGeneroMusical es obligatorio")
     private Integer idGeneroMusical;
+    
+    private String sexo;
+    private String generoMusical;
 
     public ArtistaDto() {
     }
+
+    public ArtistaDto(Integer id, String nombre, String fechaNacimiento, String nacionalidad, String sexo, String generoMusical) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.nacionalidad = nacionalidad;
+        this.sexo = sexo;
+        this.generoMusical = generoMusical;
+    }
+    
 
     //Constructor Select
     public ArtistaDto(Integer id, String nombre) {
@@ -46,7 +60,7 @@ public class ArtistaDto {
         this.nombre = nombre;
     }
 
-    public ArtistaDto(Integer id, String nombre, Calendar fechaNacimiento, String nacionalidad, Integer idSexo, Integer idGeneroMusical) {
+    public ArtistaDto(Integer id, String nombre, String fechaNacimiento, String nacionalidad, Integer idSexo, Integer idGeneroMusical) {
         this.id = id;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -54,6 +68,7 @@ public class ArtistaDto {
         this.idSexo = idSexo;
         this.idGeneroMusical = idGeneroMusical;
     }
+    
 
     /**
      * @return the id
@@ -86,14 +101,14 @@ public class ArtistaDto {
     /**
      * @return the fechaNacimiento
      */
-    public Calendar getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
     /**
      * @param fechaNacimiento the fechaNacimiento to set
      */
-    public void setFechaNacimiento(Calendar fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -131,6 +146,35 @@ public class ArtistaDto {
     public Integer getIdGeneroMusical() {
         return idGeneroMusical;
     }
+    
+     /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    /**
+     * @return the generoMusical
+     */
+    public String getGeneroMusical() {
+        return generoMusical;
+    }
+
+    /**
+     * @param generoMusical the generoMusical to set
+     */
+    public void setGeneroMusical(String generoMusical) {
+        this.generoMusical = generoMusical;
+    }
+
 
     /**
      * @param idGeneroMusical the idGeneroMusical to set

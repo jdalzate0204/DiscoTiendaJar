@@ -35,7 +35,8 @@ public class ArtistaRepoImpl implements IArtistaRepo {
     
     @Override
     public List<Artista> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Artista> query= em.createNamedQuery("Artista.ListarTodos",Artista.class);
+        return query.getResultList();
     }
 
     @Override

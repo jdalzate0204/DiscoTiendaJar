@@ -15,8 +15,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 @NamedQueries({
     @NamedQuery(name = "Artista.ContarNombre", query = "SELECT COUNT(a.nombre) FROM Artista a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "Artista.ListarSelect", query = "SELECT NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id, a.nombre) FROM Artista a")
+    @NamedQuery(name = "Artista.ListarSelect", query = "SELECT NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id, a.nombre) FROM Artista a"),
+    @NamedQuery(name = "Artista.ListarTodos", query = "SELECT  NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id , a.nombre, a.fechaNacimiento, a.nacionalidad, a.sexo.descripcion,a.generoMusical.descripcion)\n" 
+            +"FROM Artista a")
 })
+
 public class Artista implements Serializable {
     
     @Id
@@ -27,8 +30,7 @@ public class Artista implements Serializable {
     private String nombre;
     
     @Column(name = "fecha_nacimiento", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar fechaNacimiento;
+    private String fechaNacimiento;
 
     @Column(name = "nacionalidad", nullable = false, length = 20)
     private String nacionalidad;
@@ -49,11 +51,13 @@ public class Artista implements Serializable {
     
     @Transient
     private Integer idGeneroMusical;
+    
+ 
 
     public Artista() {
     }
 
-    public Artista(String nombre, Calendar fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
+    public Artista(String nombre, String fechaNacimiento, String nacionalidad, Sexo sexo, GeneroMusical generoMusical, List<Album> album) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
@@ -78,11 +82,11 @@ public class Artista implements Serializable {
         this.nombre = nombre;
     }
 
-    public Calendar getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Calendar fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
