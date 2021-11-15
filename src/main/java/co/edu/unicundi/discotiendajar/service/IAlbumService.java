@@ -17,4 +17,5 @@ public interface IAlbumService {
     public Album listarPorId(Integer id);
     public void editar(Album obj);
     public void eliminar(Integer id);
+    public List<Album> listarSelect();
 }

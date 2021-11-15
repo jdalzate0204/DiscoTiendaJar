@@ -1,7 +1,5 @@
 package co.edu.unicundi.discotiendajar.dto;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Set;
 import javax.validation.*;
 import javax.validation.constraints.*;
@@ -50,6 +48,12 @@ public class AlbumDto {
         this.artista = artista;
     }
 
+    //Constructor Select
+    public AlbumDto(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+    
     public AlbumDto(Integer id, String nombre, String imagen, String descripcion, String fechaLanzamiento, Double precio, Integer idArtista) {
         this.id = id;
         this.nombre = nombre;

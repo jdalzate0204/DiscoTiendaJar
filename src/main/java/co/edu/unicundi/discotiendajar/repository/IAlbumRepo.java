@@ -1,6 +1,7 @@
 package co.edu.unicundi.discotiendajar.repository;
 
 import co.edu.unicundi.discotiendajar.entity.Album;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -10,4 +11,5 @@ import javax.ejb.Local;
 @Local
 public interface IAlbumRepo extends ICrud<Album, Integer> {
     public int validarExistenciaAlbum(String nombre);
+    public List<Album> listarSelect();
 }

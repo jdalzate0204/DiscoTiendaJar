@@ -50,4 +50,10 @@ public class AlbumRepoImpl implements IAlbumRepo {
     public void eliminar(Album obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
+
+    @Override
+    public List<Album> listarSelect() {
+        TypedQuery<Album> query = em.createNamedQuery("Album.ListarSelect", Album.class);
+        return query.getResultList();
+    }
 }

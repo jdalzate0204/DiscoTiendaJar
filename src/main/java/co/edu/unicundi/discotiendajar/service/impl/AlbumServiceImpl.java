@@ -68,4 +68,9 @@ public class AlbumServiceImpl implements IAlbumService {
     public void eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Album> listarSelect() {
+        return this.repo.listarSelect();
+    }
 }

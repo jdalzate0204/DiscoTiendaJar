@@ -1,14 +1,8 @@
 package co.edu.unicundi.discotiendajar.dto;
 
-import java.util.Calendar;
 import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.*;
+import javax.validation.constraints.*;
 
 /**
  *
@@ -53,7 +47,6 @@ public class ArtistaDto {
         this.generoMusical = generoMusical;
     }
     
-
     //Constructor Select
     public ArtistaDto(Integer id, String nombre) {
         this.id = id;

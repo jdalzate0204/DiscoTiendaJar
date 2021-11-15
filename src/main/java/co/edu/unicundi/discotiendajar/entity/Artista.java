@@ -1,7 +1,6 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -19,7 +18,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "Artista.ListarTodos", query = "SELECT  NEW co.edu.unicundi.discotiendajar.dto.ArtistaDto(a.id , a.nombre, a.fechaNacimiento, a.nacionalidad, a.sexo.descripcion,a.generoMusical.descripcion)\n" 
             +"FROM Artista a")
 })
-
 public class Artista implements Serializable {
     
     @Id

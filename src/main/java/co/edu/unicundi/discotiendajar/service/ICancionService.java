@@ -1,6 +1,8 @@
 package co.edu.unicundi.discotiendajar.service;
 
+import co.edu.unicundi.discotiendajar.dto.CancionDto;
 import co.edu.unicundi.discotiendajar.entity.*;
+import co.edu.unicundi.discotiendajar.exception.ResourceIllegalArgumentException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -8,9 +10,9 @@ import javax.ejb.Local;
  *
  * @author acer
  */
-@Local
+//@Local
 public interface ICancionService {
-    public void guardar(Cancion obj);
+    public void guardar(CancionDto obj) throws ResourceIllegalArgumentException;
     public List<Cancion> listar();
     public Cancion listarPorId(Integer id);
     public void editar(Cancion obj);

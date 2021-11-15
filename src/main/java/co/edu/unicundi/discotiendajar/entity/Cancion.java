@@ -1,9 +1,7 @@
 package co.edu.unicundi.discotiendajar.entity;
 
 import java.io.Serializable;
-import java.sql.Time;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
@@ -17,29 +15,19 @@ public class Cancion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @NotNull(message = "nombre es obligatorio")
-    @Size(min = 4, max = 30, message = "nombre debe estar entre 4 y 30 caracteres")
+
     @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
-    
-    @NotNull(message = "descripción es obligatorio")
-    @Size(min = 5, max = 150, message = "descripción debe estar entre 5 y 20 caracteres")
+
     @Column(name = "descripcion", nullable = false, length = 150)
     private String descripcion;
-    
-    @NotNull(message = "duracion es obligatorio")
-    @Pattern(regexp = "^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$", message = "¡Ingrese el formato 00:00:00!")
+
     @Column(name = "duracion", nullable = false)
-    private Time duracion;
-    
-    @NotNull(message = "colaboraciones es obligatorio")
+    private String duracion;
+
     @Column(name = "colaboraciones", nullable = true)
     private String colaboraciones;
-    
-    @NotNull(message = "precio es obligatorio")
-    @Min(value = 2000)
-    @Pattern(regexp = "^\\d+$", message = "¡Solo se admiten numeros!")
+
     @Column(name = "precio", nullable = false)
     private Double precio;
 
@@ -54,7 +42,7 @@ public class Cancion implements Serializable {
     public Cancion() {
     }
 
-    public Cancion(String nombre, String descripcion, Time duracion, String colaboraciones, Double precio, Album album, Formato formato) {
+    public Cancion(String nombre, String descripcion, String duracion, String colaboraciones, Double precio, Album album, Formato formato) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -88,11 +76,11 @@ public class Cancion implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Time getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(Time duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
 
