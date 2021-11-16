@@ -19,7 +19,7 @@ public class AlbumDto {
     private String imagen;
     
     @NotNull(message = "descripción es obligatorio")
-    @Size(min = 5, max = 150, message = "descripción debe estar entre 5 y 20 caracteres")
+    @Size(min = 5, max = 300, message = "descripción debe estar entre 5 y 300 caracteres")
     private String descripcion;
     
     @NotNull(message = "fechaLanzamiento es obligatorio")

@@ -12,7 +12,7 @@ import javax.ejb.Local;
  */
 //@Local
 public interface ICancionService {
-    public void guardar(CancionDto obj) throws ResourceIllegalArgumentException;
+    public void guardar(CancionDto obj) throws ResourceIllegalArgumentException, CloneNotSupportedException;
     public List<Cancion> listar();
     public Cancion listarPorId(Integer id);
     public void editar(Cancion obj);

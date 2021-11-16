@@ -36,8 +36,22 @@ public class CancionDto {
     
     @NotNull(message = "idAlbum es obligatorio")
     private Integer idFormato;
+    
+    private String album;
+    private String formato;
 
     public CancionDto() {
+    }
+
+    public CancionDto(Integer id, String nombre, String descripcion, String duracion, String colaboraciones, Double precio, String album, String formato) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.colaboraciones = colaboraciones;
+        this.precio = precio;
+        this.album = album;
+        this.formato = formato;
     }
 
     public CancionDto(Integer id, String nombre, String descripcion, String duracion, String colaboraciones, Double precio, Integer idAlbum, Integer idFormato) {
@@ -113,6 +127,22 @@ public class CancionDto {
 
     public void setIdFormato(Integer idFormato) {
         this.idFormato = idFormato;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
     }
     
     public Set<ConstraintViolation<CancionDto>> validar(){

@@ -26,7 +26,7 @@ public class CancionServiceImpl implements ICancionService {
     }
     
     @Override
-    public void guardar(CancionDto obj) throws ResourceIllegalArgumentException {
+    public void guardar(CancionDto obj) throws ResourceIllegalArgumentException, CloneNotSupportedException {
         HashMap<String, String> errores = new HashMap();
         
         for (ConstraintViolation error: obj.validar())
@@ -35,28 +35,33 @@ public class CancionServiceImpl implements ICancionService {
         if (errores.size() > 0)
             throw new ResourceIllegalArgumentException(errores.toString());
         else {
-            Album album = new Album();
-            album.setId(obj.getIdAlbum());
+            int contador = this.repo.validarExistenciaCancion(obj.getNombre());
             
-            Formato formato = new Formato();
-            formato.setId(obj.getIdFormato());
-            
-            Cancion cancion = new Cancion();
-            cancion.setNombre(obj.getNombre());
-            cancion.setDescripcion(obj.getDescripcion());
-            cancion.setDuracion(obj.getDuracion());
-            cancion.setFormato(formato);
-            cancion.setColaboraciones(obj.getColaboraciones());
-            cancion.setPrecio(obj.getPrecio());
-            cancion.setAlbum(album);
-            
-            this.repo.guardar(cancion);
+            if (contador == 0) {
+                Album album = new Album();
+                album.setId(obj.getIdAlbum());
+
+                Formato formato = new Formato();
+                formato.setId(obj.getIdFormato());
+
+                Cancion cancion = new Cancion();
+                cancion.setNombre(obj.getNombre());
+                cancion.setDescripcion(obj.getDescripcion());
+                cancion.setDuracion(obj.getDuracion());
+                cancion.setFormato(formato);
+                cancion.setColaboraciones(obj.getColaboraciones());
+                cancion.setPrecio(obj.getPrecio());
+                cancion.setAlbum(album);
+
+                this.repo.guardar(cancion);
+            } else
+                throw new CloneNotSupportedException("Canción ya registrada"); 
         }
     }
 
     @Override
     public List<Cancion> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.repo.listarTodos();
     }
 
     @Override

@@ -25,11 +25,21 @@ public class CancionRepoImpl implements ICancionRepo {
     @Override
     public void guardar(Cancion obj) {
         this.em.persist(obj);
+    }    
+
+    @Override
+    public int validarExistenciaCancion(String nombre) {
+        Query query = em.createNamedQuery("Cancion.ContarNombre");
+        query.setParameter("nombre", nombre);
+        Number validador = (Number) query.getSingleResult();
+        int respuesta = validador.intValue();
+        return respuesta;
     }
 
     @Override
     public List<Cancion> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Cancion> query = em.createNamedQuery("Cancion.ListarTodos", Cancion.class);
+        return query.getResultList();
     }
 
     @Override
@@ -45,5 +55,5 @@ public class CancionRepoImpl implements ICancionRepo {
     @Override
     public void eliminar(Cancion obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+    }
 }

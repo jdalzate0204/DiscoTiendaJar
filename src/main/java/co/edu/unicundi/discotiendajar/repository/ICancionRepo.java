@@ -11,4 +11,5 @@ import javax.ejb.Local;
 @Local
 public interface ICancionRepo  extends ICrud<Cancion, Integer>{
     public List<Formato> obtenerFormato();
+    public int validarExistenciaCancion(String nombre);
 }
