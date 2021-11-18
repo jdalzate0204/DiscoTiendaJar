@@ -9,8 +9,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table (name = "administrador", schema = "principal")
+/*@NamedQueries({
+    @NamedQuery(name = "Administrador.Login", query = "SELECT a.usuario, a.contrasena FROM Admnistrador a WHERE a.usuario = :usuario AND a.contrasena= :contrasena")
+})*/
 public class Administrador implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,13 +23,17 @@ public class Administrador implements Serializable {
     
     @Column(name = "contrasena", nullable = false, length = 30)
     private String contrasena;
+    
+    @Column (name="rol",nullable=false)
+    private Integer rol;
 
-    public Administrador() {
-    }
-
-    public Administrador(String usuario, String contrasena) {
+    public Administrador(String usuario, String contrasena, Integer rol) {
         this.usuario = usuario;
         this.contrasena = contrasena;
+        this.rol = rol;
+    }
+    
+    public Administrador() {
     }
 
     public Integer getId() {
@@ -51,5 +58,13 @@ public class Administrador implements Serializable {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public Integer getRol() {
+        return rol;
+    }
+
+    public void setRol(Integer rol) {
+        this.rol = rol;
     }
 }
